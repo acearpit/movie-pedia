@@ -1,0 +1,71 @@
+.Navbar {
+  background-color: #daa520;
+  color: aliceblue;
+  height: 60px !important;
+  padding: 1px 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.img {
+  padding-left: 5px;
+  /* padding-right:; */
+  height: 60px;
+  width: 80px;
+}
+
+.login {
+  margin-left: 9%;
+}
+
+.signup {
+  margin-left: 5px;
+}
+
+.login,
+.signup {
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .login,
+  .signup {
+    display: none;
+  }
+
+  .searchbar {
+    margin-left: 1%;
+  }
+}
+
+.searchbar {
+  margin-left: 17%;
+  width: 56vw;
+  height: 70%;
+  display: flex;
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.input {
+  border: 2px solid black;
+  width: 100%;
+  height: 100% !important;
+  /* margin-right: 2px; */
+}
+
+.input:focus {
+  border: 3px solid steelblue;
+}
+
+.submit {
+  border: 2px solid black;
+  /* height: 100% !important; */
+  width: auto;
+}
