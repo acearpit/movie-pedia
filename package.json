@@ -1,6 +1,6 @@
 {
   "homepage": "https://acearpit.github.io/movie-pedia",
-  "name": "tmdb",
+  "name": "movie-pedia",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
