@@ -23,7 +23,7 @@ class Banner extends React.Component {
       )
       .then((res) => {
         // console.log("Hello", res);
-        const arr = res.data.results.slice(0, 5);
+        const arr = res.data.results;
         setTimeout(() => {
           this.setState({
             cntr: 1,
