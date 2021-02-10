@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/movie-pedia/static/css/main.590cf1bf.chunk.css",
-    "main.js": "/movie-pedia/static/js/main.a123ff65.chunk.js",
-    "main.js.map": "/movie-pedia/static/js/main.a123ff65.chunk.js.map",
+    "main.js": "/movie-pedia/static/js/main.c404cc99.chunk.js",
+    "main.js.map": "/movie-pedia/static/js/main.c404cc99.chunk.js.map",
     "runtime-main.js": "/movie-pedia/static/js/runtime-main.9b9b6635.js",
     "runtime-main.js.map": "/movie-pedia/static/js/runtime-main.9b9b6635.js.map",
     "static/css/2.18acdab0.chunk.css": "/movie-pedia/static/css/2.18acdab0.chunk.css",
-    "static/js/2.d95b425c.chunk.js": "/movie-pedia/static/js/2.d95b425c.chunk.js",
-    "static/js/2.d95b425c.chunk.js.map": "/movie-pedia/static/js/2.d95b425c.chunk.js.map",
+    "static/js/2.4872eca5.chunk.js": "/movie-pedia/static/js/2.4872eca5.chunk.js",
+    "static/js/2.4872eca5.chunk.js.map": "/movie-pedia/static/js/2.4872eca5.chunk.js.map",
     "static/js/3.d49ac2cb.chunk.js": "/movie-pedia/static/js/3.d49ac2cb.chunk.js",
     "static/js/3.d49ac2cb.chunk.js.map": "/movie-pedia/static/js/3.d49ac2cb.chunk.js.map",
     "index.html": "/movie-pedia/index.html",
     "static/css/2.18acdab0.chunk.css.map": "/movie-pedia/static/css/2.18acdab0.chunk.css.map",
     "static/css/main.590cf1bf.chunk.css.map": "/movie-pedia/static/css/main.590cf1bf.chunk.css.map",
-    "static/js/2.d95b425c.chunk.js.LICENSE.txt": "/movie-pedia/static/js/2.d95b425c.chunk.js.LICENSE.txt",
+    "static/js/2.4872eca5.chunk.js.LICENSE.txt": "/movie-pedia/static/js/2.4872eca5.chunk.js.LICENSE.txt",
     "static/media/mdb.css": "/movie-pedia/static/media/arrow_right.0897f985.svg",
     "static/media/all.min.css": "/movie-pedia/static/media/fa-solid-900.f4f93856.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.9b9b6635.js",
     "static/css/2.18acdab0.chunk.css",
-    "static/js/2.d95b425c.chunk.js",
+    "static/js/2.4872eca5.chunk.js",
     "static/css/main.590cf1bf.chunk.css",
-    "static/js/main.a123ff65.chunk.js"
+    "static/js/main.c404cc99.chunk.js"
   ]
 }
