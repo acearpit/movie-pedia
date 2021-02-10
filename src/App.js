@@ -85,7 +85,7 @@ class App extends Component {
           <Navbar handleSearch={this.handleSearch} />
           {this.state.toRedirect ? this.funcCall() : <></>}
           <Switch>
-            <Route path="/" exact>
+            <Route path="/movie-pedia" exact>
               {this.state.isLoading ? (
                 <HashLoader
                   color={"#daa520"}
@@ -98,7 +98,7 @@ class App extends Component {
                 <HomePage />
               )}
             </Route>
-            <Route path="/movie/:id" component={Movie} />
+            <Route path="/movie-pedia/movie/:id" component={Movie} />
           </Switch>
           {this.state.isLoading ? null : <Footer />}
         </div>

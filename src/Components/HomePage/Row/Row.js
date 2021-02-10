@@ -50,7 +50,7 @@ class Row extends React.Component {
                   />
                 </div>
                 <div className="more_info">
-                  <Link to={`/movie/${movie.id}`}>
+                  <Link to={`/movie-pedia/movie/${movie.id}`}>
                     <button className="more_details">More Details</button>
                   </Link>
                 </div>

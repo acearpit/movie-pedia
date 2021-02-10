@@ -112,7 +112,7 @@ class LiveSearch extends Component {
                   />
                   <button type="submit" className="more_details">
                     <Link
-                      to={`/movie/${movie.id}`}
+                      to={`/movie-pedia/movie/${movie.id}`}
                       style={{
                         textDecoration: "none",
                         color: "black",
