@@ -1,22 +1,13 @@
 import "./index.css";
-
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import reportWebVitals from "./reportWebVitals";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import App from "./App";
 
-// class Index extends Component {
-//   render() {
-//     return (
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     );
-//   }
-// }
+import React from "react";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+
+import App from "./App.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
