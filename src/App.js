@@ -75,7 +75,7 @@ class App extends Component {
   funcCall = () => {
     // console.log("I am here!");
     this.setState({ toRedirect: false });
-    return <Redirect to="/" />;
+    return <Redirect to="/movie-pedia" />;
   };
 
   render() {
