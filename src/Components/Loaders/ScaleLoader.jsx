@@ -1,29 +1,32 @@
 import { css } from "@emotion/core";
 
 import React from "react";
-
-import HashLoader from "react-spinners/HashLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const override = css`
-  // position: absolute;
+  position: absolute;
   top: 35vh;
+  left: 45vw;
   margin: auto auto;
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
 
-class Loader extends React.Component {
+class SLoader extends React.Component {
   render() {
     return (
-      <HashLoader
+      <ScaleLoader
         css={override}
-        size={this.props.size}
         color={this.props.color}
         loading={this.props.loading}
+        height={this.props.height}
+        width={this.props.width}
+        radius={this.props.radius}
+        margin={this.props.margin}
       />
     );
   }
 }
 
-export default Loader;
+export default SLoader;

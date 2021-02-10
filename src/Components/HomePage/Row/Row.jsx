@@ -4,8 +4,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import HashLoader from "../../Loaders/HashLoader";
-import Auxiliary from "../../../hoc/Auxiliary";
+import HashLoader from "../../Loaders/HashLoader.jsx";
+import Auxiliary from "../../../hoc/Auxiliary.jsx";
 
 class Row extends React.Component {
   state = {

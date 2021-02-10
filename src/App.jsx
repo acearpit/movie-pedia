@@ -5,12 +5,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
-import Navbar from "./Components/Navbar/Navbar";
-import HomePage from "./Containers/HomePage/HomePage";
-import LiveSearch from "./Containers/LiveSearch/LiveSearch";
-import HashLoader from "./Components/Loaders/HashLoader";
-import Movie from "./Containers/Movie/Movie";
-import Footer from "./Components/Footer/Footer";
+import Navbar from "./Components/Navbar/Navbar.jsx";
+import HomePage from "./Containers/HomePage/HomePage.jsx";
+import LiveSearch from "./Containers/LiveSearch/LiveSearch.jsx";
+import HashLoader from "./Components/Loaders/HashLoader.jsx";
+import Movie from "./Containers/Movie/Movie.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 class App extends Component {
   state = {

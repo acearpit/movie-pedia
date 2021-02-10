@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-import HashLoader from "../../Components/Loaders/HashLoader";
-import Auxiliary from "../../hoc/Auxiliary";
+import HashLoader from "../../Components/Loaders/HashLoader.jsx";
+import Auxiliary from "../../hoc/Auxiliary.jsx";
 
 class Movie extends Component {
   state = {

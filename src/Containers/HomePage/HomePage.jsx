@@ -2,8 +2,8 @@ import "./HomePage.css";
 
 import React, { Component } from "react";
 
-import Banner from "../../Components/HomePage/Banner/Banner";
-import Row from "../../Components/HomePage/Row/Row";
+import Banner from "../../Components/HomePage/Banner/Banner.jsx";
+import Row from "../../Components/HomePage/Row/Row.jsx";
 
 class HomePage extends Component {
   render() {

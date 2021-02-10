@@ -5,8 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 
-import Auxiliary from "../../hoc/Auxiliary";
-import HashLoader from "../../Components/Loaders/HashLoader";
+import Auxiliary from "../../hoc/Auxiliary.jsx";
+import HashLoader from "../../Components/Loaders/HashLoader.jsx";
 
 class LiveSearch extends Component {
   state = {
