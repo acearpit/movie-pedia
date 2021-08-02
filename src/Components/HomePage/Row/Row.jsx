@@ -2,6 +2,7 @@ import "./Row.css";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import axios from "axios";
 
 import HashLoader from "../../Loaders/HashLoader.jsx";
@@ -16,9 +17,7 @@ class Row extends React.Component {
 
   getMovies = () => {
     axios
-      .get(
-        `https://api.themoviedb.org/3${this.props.movie_type}?api_key=${this.state.API_KEY}`
-      )
+      .get(`https://api.themoviedb.org/3${this.props.movie_type}?api_key=${this.state.API_KEY}`)
       .then((res) => {
         this.setState({
           isLoading: false,
@@ -26,11 +25,7 @@ class Row extends React.Component {
         });
       })
       .catch((err) => {
-        console.log(
-          "Error in fetching movie rows!",
-          this.props.movie_type,
-          err
-        );
+        console.log("Error in fetching movie rows!", this.props.movie_type, err);
       });
   };
 
@@ -44,10 +39,7 @@ class Row extends React.Component {
             return (
               <div className="row_movie" key={movie.id}>
                 <div className="image_cont">
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                    className="row_IMG"
-                  />
+                  <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} className="row_IMG" />
                 </div>
                 <div className="more_info">
                   <Link to={`/movie-pedia/movie/${movie.id}`}>
@@ -70,11 +62,12 @@ class Row extends React.Component {
     return (
       <Auxiliary>
         {this.state.isLoading ? (
-          <HashLoader
-            color={"#daa520"}
-            loading={this.state.isLoading}
-            size={100}
-          />
+          // <HashLoader
+          //   color={"#daa520"}
+          //   loading={this.state.isLoading}
+          //   size={100}
+          // />
+          <> </>
         ) : (
           this.buildRow()
         )}
