@@ -18,9 +18,7 @@ class Banner extends React.Component {
   getPopularMovies = () => {
     // console.log("Here!");
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${this.state.API_KEY}&language=en-US&page=1`
-      )
+      .get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.state.API_KEY}&language=en-US&page=1`)
       .then((res) => {
         // console.log("Hello", res);
         const arr = res.data.results;
@@ -42,75 +40,32 @@ class Banner extends React.Component {
     // console.log(updatedArr);
     return (
       <Auxiliary>
-        <div
-          id="banner"
-          className="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-        >
+        <div id="banner" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-inner">
             {updatedArr.map((movie, idx) => {
               return (
-                <div
-                  key={movie.id}
-                  className={
-                    idx === 0 ? "carousel-item active" : "carousel-item"
-                  }
-                >
+                <div key={movie.id} className={idx === 0 ? "carousel-item active" : "carousel-item"}>
                   <div className="IMAGE_CONTAINER">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                      className="IMAGE"
-                      alt={movie.original_title}
-                    />
+                    <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} className="IMAGE" alt={movie.original_title} />
                   </div>
                   <div className="carousel-caption d-block">
                     <h5 className="caption">{movie.original_title}</h5>
-                    <Link
-                      to={`/movie-pedia/movie/${movie.id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <button className="btn btn-md more_INFO">
-                        MORE INFO
-                      </button>
+                    <Link to={`/movie-pedia/movie/${movie.id}`} style={{ textDecoration: "none" }}>
+                      <button className="btn btn-md more_INFO">MORE INFO</button>
                     </Link>
                   </div>
                 </div>
               );
             })}
           </div>
-          <a
-            className="carousel-control-prev"
-            href="#banner"
-            role="button"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
+          <a className="carousel-control-prev" href="#banner" role="button" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
             <span className="visually-hidden"></span>
           </a>
-          <a
-            className="carousel-control-next"
-            href="#banner"
-            role="button"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
+          <a className="carousel-control-next" href="#banner" role="button" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
             <span className="visually-hidden"></span>
           </a>
-          {/* <button
-            // type="button"
-            className="carousel-caption move_down btn-sm"
-            onClick={() => {
-              window.scrollBy(0, window.innerHeight);
-            }}
-          >
-            Scroll Down
-          </button> */}
         </div>
       </Auxiliary>
     );
@@ -121,19 +76,7 @@ class Banner extends React.Component {
   }
 
   render() {
-    return (
-      <Auxiliary>
-        {this.state.isLoading ? (
-          <HashLoader
-            color={"#daa520"}
-            loading={this.state.isLoading}
-            size={100}
-          />
-        ) : (
-          this.buildBanner()
-        )}
-      </Auxiliary>
-    );
+    return <Auxiliary>{this.state.isLoading ? <HashLoader color={"#daa520"} loading={this.state.isLoading} size={100} /> : this.buildBanner()}</Auxiliary>;
   }
 }
 

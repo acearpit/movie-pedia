@@ -6,20 +6,24 @@
   align-items: stretch;
   overflow-x: auto;
   padding-left: 5px !important;
-  /* padding-top: 5rem; */
 }
 
 .row_movie {
-  margin: 2px;
+  margin: 8px;
   margin-left: 5px;
-  height: 450px;
-  width: 300px;
-  /* padding-left: 5px; */
+  height: auto;
+  width: auto;
+  transition: all 0.5s ease-in-out;
+  border: 5px solid transparent;
+}
+
+.row_movie:hover {
+  border: 5px solid goldenrod;
 }
 
 .row_IMG {
-  height: 400px;
-  width: 300px;
+  height: 350px;
+  width: 250px;
 }
 
 .movie_type {
@@ -31,5 +35,5 @@
 }
 
 .rows::-webkit-scrollbar {
-  width: 5px !important;
+  width: 2px !important;
 }

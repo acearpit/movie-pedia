@@ -6,8 +6,7 @@
   align-items: center;
   /* padding: 50px auto; */
   padding: 200px auto;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .next_prev {
@@ -36,12 +35,12 @@
 
 .movie {
   background-color: black;
-  border: 3px solid black;
+  border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 3px 3px;
+  margin: 10px 10px;
 }
 
 .img_container {
