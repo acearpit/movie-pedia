@@ -1,48 +1,24 @@
 import "./LiveSearch.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 
 import Auxiliary from "../../hoc/Auxiliary.jsx";
 import HashLoader from "../../Components/Loaders/HashLoader.jsx";
+import { connect } from "react-redux";
+import { getCurrentSearchData } from "../../redux/actionCreators/currentSearch";
 
-const LiveSearch = ({ search }) => {
-  const [state, setState] = useState({
-    isLoading: false,
-    API_KEY: "3e4103174dec93f06df85aeacabc112c",
-    search,
-  });
-
-  const handlePaginationSearch = (toSearch, page) => {
-    setState({ ...state, isLoading: true });
-    axios
-      .get(`https://api.themoviedb.org/3/search/movie?api_key=${state.API_KEY}&query=${toSearch}&page=${page}`)
-      .then((res) => {
-        setTimeout(() => {
-          setState({
-            ...state,
-            isLoading: false,
-            search: {
-              ...state.search,
-              movies: res.data.results,
-              curr_page: page,
-              totPages: res.data.total_pages,
-              curr_search: toSearch,
-            },
-          });
-        }, 200);
-      })
-      .catch((err) => console.log(err));
-  };
+const LiveSearch = ({ state, handleLiveSearch }) => {
+  const [loading, setLoading] = useState(true);
 
   const prevHandler = () => {
-    handlePaginationSearch(state.search.curr_search, state.search.curr_page - 1);
+    handleLiveSearch(state.search.curr_search, state.search.curr_page - 1);
   };
 
   const nextHandler = () => {
-    handlePaginationSearch(state.search.curr_search, state.search.curr_page + 1);
+    handleLiveSearch(state.search.curr_search, state.search.curr_page + 1);
   };
 
   const renderSearchResults = (res) => {
@@ -112,7 +88,26 @@ const LiveSearch = ({ search }) => {
     );
   };
 
-  return state.isLoading ? <HashLoader color={"#daa520"} loading={state.isLoading} size={100} /> : renderSearchResults(state.search);
+  useEffect(() => {
+    if (!state.isLoading) setLoading(false);
+  }, [state.isLoading]);
+
+  return loading ? <HashLoader color={"#daa520"} loading={loading} size={100} /> : renderSearchResults(state.search);
 };
 
-export default withRouter(LiveSearch);
+const mapStateToProps = (globalState) => {
+  return {
+    state: {
+      isLoading: globalState.stateVariables.searchLoading,
+      search: globalState.currentSearch,
+    },
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLiveSearch: (searchQuery, pageNum) => dispatch(getCurrentSearchData(searchQuery, pageNum)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LiveSearch));

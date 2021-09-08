@@ -8,7 +8,7 @@ const navbar = (props) => (
       <img src="https://pngimage.net/wp-content/uploads/2018/06/mp-png-5.png" className="img" />
     </a>
     <div className="searchbar">
-      <input type="text" placeholder="Search here..." className="input" id="searchBar" onKeyUp={props.handleSearch} />
+      <input type="text" placeholder="Search here..." className="input" id="searchBar" onChange={props.handleSearch} />
     </div>
     <button type="submit" className="login">
       Login

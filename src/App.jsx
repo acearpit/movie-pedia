@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import HomePage from "./Containers/HomePage/HomePage.jsx";
@@ -11,82 +11,58 @@ import LiveSearch from "./Containers/LiveSearch/LiveSearch.jsx";
 import HashLoader from "./Components/Loaders/HashLoader.jsx";
 import Movie from "./Containers/Movie/Movie.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
+import { getCurrentSearchData } from "./redux/actionCreators/currentSearch";
+import { getMovies } from "./redux/actionCreators/homepage";
 
-const App = () => {
-  const [state, setState] = useState({
-    toRedirect: false,
-    isLoading: false,
-    search: {
-      movies: [],
-      currPage: 0,
-      totPages: 0,
-      curr_search: null,
-    },
-    API_KEY: "3e4103174dec93f06df85aeacabc112c",
-  });
-
+const App = ({ state, getAllMovies, handleLiveSearch }) => {
   const handleSearch = (event) => {
-    if (event.target.value !== "") {
-      let searchQuery = encodeURI(event.target.value);
-      setState({ ...state, isLoading: true });
-
-      axios
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=${state.API_KEY}&query=${searchQuery}&page=${1}`)
-        .then((res) => {
-          setState({
-            ...state,
-            isLoading: false,
-            search: {
-              movies: res.data.results,
-              curr_page: 1,
-              totPages: res.data.total_pages,
-              curr_search: searchQuery,
-            },
-          });
-        })
-        .catch((err) => {
-          console.log("Error in API movie fetch call for the first time!!", err);
-        });
-    } else {
-      setState({
-        ...state,
-        isLoading: false,
-        search: {
-          movies: [],
-          currPage: 0,
-          totPages: 0,
-          curr_search: null,
-        },
-      });
-    }
-
-    if (event.keyCode === 13)
-      setState({
-        ...state,
-        toRedirect: true,
-      });
+    handleLiveSearch(encodeURI(event.target.value), 1);
   };
 
-  const redirect = () => {
-    setState({ ...state, toRedirect: false });
-    return <Redirect to="/movie-pedia" />;
-  };
+  useEffect(() => {
+    getAllMovies();
+  }, []);
 
   return (
     <BrowserRouter>
       <div className="App" id="##">
         <Navbar handleSearch={handleSearch} />
-        {state.toRedirect ? redirect() : null}
-        <Switch>
-          <Route path="/movie-pedia" exact>
-            {state.isLoading ? <HashLoader color={"#daa520"} loading={state.isLoading} size={100} /> : state.search.curr_search ? <LiveSearch search={state.search} /> : <HomePage />}
-          </Route>
-          <Route path="/movie-pedia/movie/:id" component={Movie} />
-        </Switch>
-        {state.isLoading ? null : <Footer />}
+        {state.isLoading ? (
+          <HashLoader color={"#daa520"} loading={state.isLoading} size={100} />
+        ) : (
+          <>
+            {state.toRedirect ? <Redirect to="/movie-pedia" /> : null}
+            <Switch>
+              <Route path="/movie-pedia" exact>
+                {state.search.curr_search ? <LiveSearch /> : <HomePage />}
+              </Route>
+              <Route path="/movie-pedia/movie/:id" component={Movie} />
+            </Switch>
+            {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}
+          </>
+        )}
       </div>
     </BrowserRouter>
   );
 };
 
-export default App;
+const mapStateToProps = (globalState) => {
+  return {
+    state: {
+      isLoading: globalState.stateVariables.homepageLoading,
+      isSearchLoading: globalState.stateVariables.searchLoading,
+      isMovieLoading: globalState.stateVariables.movieLoading,
+      toRedirect: globalState.stateVariables.redirect,
+      search: globalState.currentSearch,
+    },
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllMovies: () => dispatch(getMovies()),
+    handleLiveSearch: (searchQuery, pageNum) => dispatch(getCurrentSearchData(searchQuery, pageNum)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

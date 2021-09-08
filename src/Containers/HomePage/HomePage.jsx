@@ -1,31 +1,27 @@
 import "./HomePage.css";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Banner from "../../Components/HomePage/Banner/Banner.jsx";
 import Row from "../../Components/HomePage/Row/Row.jsx";
-import HashLoader from "../../Components/Loaders/HashLoader.jsx";
+import { connect } from "react-redux";
 
-const HomePage = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  return loading ? (
-    <HashLoader color={"#daa520"} loading={loading} size={100} />
-  ) : (
+const HomePage = ({ data }) => {
+  return (
     <div className="Home">
-      <Banner />
-      <Row movie_type={"/movie/now_playing"} type="Now Playing" />
-      <Row movie_type={"/trending/movie/week"} type="Trending" />
-      <Row movie_type={"/movie/top_rated"} type="Top Rated" />
-      <Row movie_type={"/movie/upcoming"} type="Upcoming" />
+      <Banner movies={data["banner"]} />
+      <Row movies={data["nowPlaying"]} type="Now Playing" />
+      <Row movies={data["trending"]} type="Trending" />
+      <Row movies={data["topRated"]} type="Top Rated" />
+      <Row movies={data["upcoming"]} type="Upcoming" />
     </div>
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    data: state.homepage,
+  };
+};
+
+export default connect(mapStateToProps)(HomePage);

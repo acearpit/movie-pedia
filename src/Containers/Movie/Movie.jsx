@@ -1,35 +1,16 @@
 import "./Movie.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 import HashLoader from "../../Components/Loaders/HashLoader.jsx";
-import Auxiliary from "../../hoc/Auxiliary.jsx";
+import { connect } from "react-redux";
+import { getCurrentMovieData } from "../../redux/actionCreators/currentMovie";
 
-const Movie = ({ match }) => {
-  const [state, setState] = useState({
-    isLoading: true,
-    movie_data: {},
-    API_KEY: "3e4103174dec93f06df85aeacabc112c",
-  });
-
-  const fetchMovieDetails = (id) => {
-    axios
-      .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${state.API_KEY}&language=en-US`)
-      .then((res) => {
-        setTimeout(() => {
-          setState({
-            ...state,
-            isLoading: false,
-            movie_data: res.data,
-          });
-        }, 500);
-      })
-      .catch((err) => {
-        console.log("Error in fetching movie details!", err);
-      });
-  };
+const Movie = ({ match, state, getCurrentMovie }) => {
+  useEffect(() => {
+    getCurrentMovie(+match.params.id);
+  }, []);
 
   const readyData = (arr) => {
     const updated = arr.map((entry) => entry.name);
@@ -49,19 +30,18 @@ const Movie = ({ match }) => {
     return res;
   };
 
-  let image_path = null,
-    data,
-    tagline;
+  let image_path = null;
+  let data = null;
+  let tagline = null;
 
-  if (state.isLoading) fetchMovieDetails(match.params.id);
-  else {
+  if (state.movie_data) {
     data = state.movie_data;
     tagline = data.tagline ? data.tagline : "No wind favors s/he who has no destined port...";
     image_path = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
   }
 
-  return state.isLoading ? (
-    <HashLoader color={"#daa520"} loading={state.isLoading} size={100} />
+  return !state.movie_data || (state.movie_data && state.movie_data.id !== +match.params.id) ? (
+    <HashLoader color={"#daa520"} loading={state.loading} size={100} />
   ) : (
     <div className="container Movie">
       <div className="row main_row">
@@ -106,4 +86,20 @@ const Movie = ({ match }) => {
   );
 };
 
-export default withRouter(Movie);
+const mapStateToProps = (globalState) => {
+  return {
+    state: {
+      isLoading: globalState.stateVariables.movieLoading,
+      movie_data: globalState.movieData.movieData,
+      searchQuery: globalState.currentSearch.curr_search,
+    },
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCurrentMovie: (id) => dispatch(getCurrentMovieData(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Movie));
