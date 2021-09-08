@@ -13,20 +13,8 @@ const override = css`
   border-color: red;
 `;
 
-class SLoader extends React.Component {
-  render() {
-    return (
-      <ScaleLoader
-        css={override}
-        color={this.props.color}
-        loading={this.props.loading}
-        height={this.props.height}
-        width={this.props.width}
-        radius={this.props.radius}
-        margin={this.props.margin}
-      />
-    );
-  }
-}
+const SLoader = ({ color, loading, height, width, radius, margin }) => {
+  return <ScaleLoader css={override} color={color} loading={loading} height={height} width={width} radius={radius} margin={margin} />;
+};
 
 export default SLoader;

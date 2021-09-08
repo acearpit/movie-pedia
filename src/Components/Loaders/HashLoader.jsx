@@ -4,7 +4,6 @@ import React from "react";
 import HashLoader from "react-spinners/HashLoader";
 
 const override = css`
-  // position: absolute;
   top: 35vh;
   margin: auto auto;
   display: block;
@@ -12,17 +11,8 @@ const override = css`
   border-color: red;
 `;
 
-class Loader extends React.Component {
-  render() {
-    return (
-      <HashLoader
-        css={override}
-        size={this.props.size}
-        color={this.props.color}
-        loading={this.props.loading}
-      />
-    );
-  }
-}
+const Loader = ({ size, color, loading }) => {
+  return <HashLoader css={override} size={size} color={color} loading={loading} />;
+};
 
 export default Loader;

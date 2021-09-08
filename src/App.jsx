@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
@@ -12,8 +12,8 @@ import HashLoader from "./Components/Loaders/HashLoader.jsx";
 import Movie from "./Containers/Movie/Movie.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 
-class App extends Component {
-  state = {
+const App = () => {
+  const [state, setState] = useState({
     toRedirect: false,
     isLoading: false,
     search: {
@@ -23,40 +23,33 @@ class App extends Component {
       curr_search: null,
     },
     API_KEY: "3e4103174dec93f06df85aeacabc112c",
-  };
+  });
 
-  handleSearch = (event) => {
+  const handleSearch = (event) => {
     if (event.target.value !== "") {
       let searchQuery = encodeURI(event.target.value);
-      this.setState({ isLoading: true });
+      setState({ ...state, isLoading: true });
+
       axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=${
-            this.state.API_KEY
-          }&query=${searchQuery}&page=${1}`
-        )
+        .get(`https://api.themoviedb.org/3/search/movie?api_key=${state.API_KEY}&query=${searchQuery}&page=${1}`)
         .then((res) => {
-          //   console.log(res);
-          setTimeout(() => {
-            this.setState({
-              isLoading: false,
-              search: {
-                movies: res.data.results,
-                curr_page: 1,
-                totPages: res.data.total_pages,
-                curr_search: searchQuery,
-              },
-            });
-          }, 200);
+          setState({
+            ...state,
+            isLoading: false,
+            search: {
+              movies: res.data.results,
+              curr_page: 1,
+              totPages: res.data.total_pages,
+              curr_search: searchQuery,
+            },
+          });
         })
         .catch((err) => {
-          console.log(
-            "Error in API movie fetch call for the first time!!",
-            err
-          );
+          console.log("Error in API movie fetch call for the first time!!", err);
         });
     } else {
-      this.setState({
+      setState({
+        ...state,
         isLoading: false,
         search: {
           movies: [],
@@ -66,45 +59,34 @@ class App extends Component {
         },
       });
     }
-    // console.log(event);
-    if (event.keyCode === 13) {
-      this.setState({ toRedirect: true });
-    }
+
+    if (event.keyCode === 13)
+      setState({
+        ...state,
+        toRedirect: true,
+      });
   };
 
-  funcCall = () => {
-    // console.log("I am here!");
-    this.setState({ toRedirect: false });
+  const redirect = () => {
+    setState({ ...state, toRedirect: false });
     return <Redirect to="/movie-pedia" />;
   };
 
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App" id="##">
-          <Navbar handleSearch={this.handleSearch} />
-          {this.state.toRedirect ? this.funcCall() : <></>}
-          <Switch>
-            <Route path="/movie-pedia" exact>
-              {this.state.isLoading ? (
-                <HashLoader
-                  color={"#daa520"}
-                  loading={this.state.isLoading}
-                  size={100}
-                />
-              ) : this.state.search.curr_search ? (
-                <LiveSearch search={this.state.search} />
-              ) : (
-                <HomePage />
-              )}
-            </Route>
-            <Route path="/movie-pedia/movie/:id" component={Movie} />
-          </Switch>
-          {this.state.isLoading ? null : <Footer />}
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+  return (
+    <BrowserRouter>
+      <div className="App" id="##">
+        <Navbar handleSearch={handleSearch} />
+        {state.toRedirect ? redirect() : null}
+        <Switch>
+          <Route path="/movie-pedia" exact>
+            {state.isLoading ? <HashLoader color={"#daa520"} loading={state.isLoading} size={100} /> : state.search.curr_search ? <LiveSearch search={state.search} /> : <HomePage />}
+          </Route>
+          <Route path="/movie-pedia/movie/:id" component={Movie} />
+        </Switch>
+        {state.isLoading ? null : <Footer />}
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;

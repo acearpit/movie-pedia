@@ -1,39 +1,38 @@
 import "./Row.css";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import axios from "axios";
 
-import HashLoader from "../../Loaders/HashLoader.jsx";
 import Auxiliary from "../../../hoc/Auxiliary.jsx";
 
-class Row extends React.Component {
-  state = {
+const Row = ({ type, movie_type }) => {
+  const [state, setState] = useState({
     isLoading: true,
     movies: [],
     API_KEY: "3e4103174dec93f06df85aeacabc112c",
-  };
+  });
 
-  getMovies = () => {
+  const getMovies = () => {
     axios
-      .get(`https://api.themoviedb.org/3${this.props.movie_type}?api_key=${this.state.API_KEY}`)
+      .get(`https://api.themoviedb.org/3${movie_type}?api_key=${state.API_KEY}`)
       .then((res) => {
-        this.setState({
+        setState({
+          ...state,
           isLoading: false,
           movies: res.data.results,
         });
       })
       .catch((err) => {
-        console.log("Error in fetching movie rows!", this.props.movie_type, err);
+        console.log("Error in fetching movie rows!", movie_type, err);
       });
   };
 
-  buildRow = () => {
-    const updatedArr = this.state.movies;
+  const buildRow = () => {
+    const updatedArr = state.movies;
     return (
       <Auxiliary>
-        <h1 className="movie_type text-left pl-2">{this.props.type}</h1>
+        <h1 className="movie_type text-left pl-2">{type}</h1>
         <div className="container-fluid rows">
           {updatedArr.map((movie) => {
             return (
@@ -54,26 +53,11 @@ class Row extends React.Component {
     );
   };
 
-  componentDidMount() {
-    this.getMovies();
-  }
+  useEffect(() => {
+    getMovies();
+  }, []);
 
-  render() {
-    return (
-      <Auxiliary>
-        {this.state.isLoading ? (
-          // <HashLoader
-          //   color={"#daa520"}
-          //   loading={this.state.isLoading}
-          //   size={100}
-          // />
-          <> </>
-        ) : (
-          this.buildRow()
-        )}
-      </Auxiliary>
-    );
-  }
-}
+  return !state.isLoading ? buildRow() : null;
+};
 
 export default Row;

@@ -1,29 +1,28 @@
 import "./Banner.css";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 import HashLoader from "../../Loaders/HashLoader.jsx";
 import Auxiliary from "../../../hoc/Auxiliary.jsx";
 
-class Banner extends React.Component {
-  state = {
+const Banner = () => {
+  const [state, setState] = useState({
     isLoading: true,
     cntr: 0,
     movies: [],
     API_KEY: "3e4103174dec93f06df85aeacabc112c",
-  };
+  });
 
-  getPopularMovies = () => {
-    // console.log("Here!");
+  const getPopularMovies = () => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.state.API_KEY}&language=en-US&page=1`)
+      .get(`https://api.themoviedb.org/3/movie/popular?api_key=${state.API_KEY}&language=en-US&page=1`)
       .then((res) => {
-        // console.log("Hello", res);
         const arr = res.data.results;
         setTimeout(() => {
-          this.setState({
+          setState({
+            ...state,
             cntr: 1,
             isLoading: false,
             movies: arr,
@@ -35,9 +34,8 @@ class Banner extends React.Component {
       });
   };
 
-  buildBanner = () => {
-    const updatedArr = this.state.movies.slice(0, 5);
-    // console.log(updatedArr);
+  const buildBanner = () => {
+    const updatedArr = state.movies.slice(0, 5);
     return (
       <Auxiliary>
         <div id="banner" className="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -71,13 +69,11 @@ class Banner extends React.Component {
     );
   };
 
-  componentDidMount() {
-    this.getPopularMovies();
-  }
+  useEffect(() => {
+    getPopularMovies();
+  }, []);
 
-  render() {
-    return <Auxiliary>{this.state.isLoading ? <HashLoader color={"#daa520"} loading={this.state.isLoading} size={100} /> : this.buildBanner()}</Auxiliary>;
-  }
-}
+  return <Auxiliary>{state.isLoading ? <HashLoader color={"#daa520"} loading={state.isLoading} size={100} /> : buildBanner()}</Auxiliary>;
+};
 
 export default Banner;
