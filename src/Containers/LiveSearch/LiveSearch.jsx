@@ -2,7 +2,6 @@ import "./LiveSearch.css";
 
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 
 import Auxiliary from "../../hoc/Auxiliary.jsx";
@@ -61,7 +60,7 @@ const LiveSearch = ({ state, handleLiveSearch }) => {
           {res.movies.map((movie) => {
             let image_path;
 
-            if (!movie.backdrop_path) image_path = "https://www.warnersstellian.com/Content/images/product_image_not_available.png";
+            if (!movie.poster_path) image_path = "https://www.warnersstellian.com/Content/images/product_image_not_available.png";
             else image_path = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
 
             return (

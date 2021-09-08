@@ -2,7 +2,7 @@ import { takeLatest, takeEvery, call, put, delay, all } from "redux-saga/effects
 
 import { GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES } from "./actionConstants";
 
-import { setCurrentMovieId, setCurrentMovieData } from "./actionCreators/currentMovie";
+import { setCurrentMovieData } from "./actionCreators/currentMovie";
 import { setCurrentSearchData } from "./actionCreators/currentSearch";
 import { setMovies } from "./actionCreators/homepage";
 import { setStateVariable } from "./actionCreators/stateVariables";
