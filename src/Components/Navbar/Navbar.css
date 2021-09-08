@@ -20,6 +20,7 @@
   display: flex;
   justify-content: center;
   height: 70%;
+  align-items: center;
 }
 
 .nav_right {
@@ -36,30 +37,43 @@
 .login,
 .signup {
   width: 100px;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.692);
+  height: 40px;
+  /* background-color: rgba(0, 0, 0, 0.767); */
+  background-color: rgba(255, 255, 255, 0.596);
   border-radius: 100px;
   padding: 5px auto;
   box-sizing: border-box;
-  font-weight: 400;
-  color: white !important;
+  font-weight: 600;
+  color: black;
   margin: 0px 2.5px;
+  border: 2px solid black;
+  outline: none;
+}
+
+.login:active,
+.signup:active {
+  background-color: rgba(0, 0, 0, 0.829);
+  border-color: darkslategray;
+  color: white;
+  /* box-shadow: 0px 2px 100px 0px rgb(0, 0, 0); */
 }
 
 .input {
   box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.698);
+  border: 3px solid rgba(0, 0, 0, 0.698);
   width: 70%;
   height: 90% !important;
   outline: none;
   border-radius: 30px !important;
   padding: 20px;
+  font-weight: 500;
+  color: black;
   transition: all 0.5s ease-in-out;
 }
 
 .input:focus {
   width: 80%;
-  border: 2px solid steelblue;
+  border: 3px solid rgba(0, 0, 0, 0.911);
 }
 
 @media (max-width: 700px) {
