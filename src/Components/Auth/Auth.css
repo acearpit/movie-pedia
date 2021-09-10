@@ -1,0 +1,99 @@
+.auth_bg {
+  width: 100vw;
+  height: calc(100vh - 113px);
+  background: url(../../images/bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth_middle_cntnr {
+  min-width: 300px;
+  width: 400px;
+  color: black;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  font-size: large;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 1px 100px black;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.auth_field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.auth_field > input {
+  border-radius: 20px;
+  outline: none;
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 15px;
+  height: 30px;
+  font-size: 1rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.596);
+  color: black;
+}
+
+.auth_field > input:focus {
+  border-color: goldenrod;
+  color: black;
+}
+
+.auth_field > span {
+  margin-bottom: 5px;
+}
+
+.switch {
+  font-size: medium;
+  color: black;
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.signup {
+  background-color: black;
+  color: white;
+  border-color: white;
+  margin-bottom: 20px;
+}
+
+.error,
+.auth_error {
+  font-size: small;
+  font-weight: 600;
+  color: red;
+  letter-spacing: 0.8px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.error_border {
+  border-color: red !important;
+}
+
+.auth_error {
+  font-size: 1rem;
+  text-align: left;
+  font-weight: 700;
+  margin-bottom: 20px;
+}

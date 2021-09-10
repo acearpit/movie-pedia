@@ -4,7 +4,7 @@
   color: aliceblue;
   height: 60px !important;
   width: 100%;
-  padding: 0px 5px;
+  padding: 0px 1px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -12,11 +12,15 @@
 
 .nav_left {
   width: 10%;
+  display: flex;
+  align-items: center;
   justify-content: flex-start;
+  height: 100%;
 }
 
 .nav_center {
   width: 70%;
+  height: 100%;
   display: flex;
   justify-content: center;
   height: 70%;
@@ -24,8 +28,10 @@
 }
 
 .nav_right {
+  height: 100%;
   width: 20%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 
@@ -38,7 +44,6 @@
 .signup {
   width: 100px;
   height: 40px;
-  /* background-color: rgba(0, 0, 0, 0.767); */
   background-color: rgba(255, 255, 255, 0.596);
   border-radius: 100px;
   padding: 5px auto;
@@ -48,14 +53,22 @@
   margin: 0px 2.5px;
   border: 2px solid black;
   outline: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login:active,
 .signup:active {
   background-color: rgba(0, 0, 0, 0.829);
-  border-color: darkslategray;
+  border-color: white;
   color: white;
-  /* box-shadow: 0px 2px 100px 0px rgb(0, 0, 0); */
+  text-decoration: none;
+}
+
+a.login {
+  text-decoration: none;
 }
 
 .input {
@@ -74,6 +87,67 @@
 .input:focus {
   width: 80%;
   border: 3px solid rgba(0, 0, 0, 0.911);
+}
+
+.user_avatar {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user_data {
+  width: auto;
+  justify-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.596);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.user_data > span {
+  color: white;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.user_dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0%;
+  width: 100%;
+  height: auto;
+  background: white;
+  color: black;
+  z-index: 1000;
+  border-radius: 10px;
+  /* padding: 5px; */
+  display: flex;
+  background-color: rgba(128, 128, 128, 0.918);
+  color: white;
+  flex-direction: column;
+}
+
+.user_dropdown > span {
+  width: 100%;
+  font-size: large;
+  font-weight: 300;
+  letter-spacing: 1.1px;
+  padding: 5px;
+}
+
+.user_dropdown .divider {
+  padding: 0px;
+  height: 1px;
+  border-top: 1px solid rgba(0, 0, 0, 0.561);
+}
+
+.user_dropdown > span > a {
+  text-decoration: none;
+  color: white;
 }
 
 @media (max-width: 700px) {

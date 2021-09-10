@@ -9,28 +9,28 @@
 }
 
 .row_movie {
-  margin: 8px;
-  margin-left: 5px;
+  margin: 5px;
+  margin-left: 3px;
   height: auto;
   width: auto;
   transition: all 0.5s ease-in-out;
-  border: 5px solid transparent;
+  border: 3px solid transparent;
 }
 
 .row_movie:hover {
-  border: 5px solid goldenrod;
+  border: 3px solid goldenrod;
 }
 
 .row_IMG {
-  height: 350px;
-  width: 250px;
+  height: 250px;
+  width: 200px;
 }
 
 .movie_type {
   padding-top: 2em;
   font-weight: 700;
   color: goldenrod;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 

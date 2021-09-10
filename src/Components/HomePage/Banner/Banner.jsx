@@ -10,9 +10,16 @@ const Banner = ({ movies }) => {
         {movies.map((movie, idx) => {
           return (
             <div key={movie.id} className={idx === 0 ? "carousel-item active" : "carousel-item"}>
-              <div className="IMAGE_CONTAINER">
-                <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} className="IMAGE" alt={movie.original_title} />
-              </div>
+              <div
+                className="IMAGE_CONTAINER"
+                style={{
+                  background: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  filter: "brightness(0.35)",
+                }}
+              />
               <div className="carousel-caption d-block">
                 <h5 className="caption">{movie.original_title}</h5>
                 <Link to={`/movie-pedia/movie/${movie.id}`} style={{ textDecoration: "none" }}>

@@ -8,6 +8,9 @@ const initialState = {
   movieLoading: false,
   movieError: false,
   redirect: false,
+  authLoading: false,
+  authSuccess: false,
+  authError: "",
 };
 
 export default (state = initialState, action) => {

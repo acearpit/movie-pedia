@@ -1,4 +1,4 @@
-import { SET_CURRENT_MOVIE_ID, SET_CURRENT_MOVIE_DATA } from "../actionConstants";
+import { SET_CURRENT_MOVIE_DATA } from "../actionConstants";
 
 const initialState = {
   movieData: null,

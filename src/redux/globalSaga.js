@@ -1,13 +1,15 @@
 import { takeLatest, takeEvery, call, put, delay, all } from "redux-saga/effects";
 
-import { GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES } from "./actionConstants";
+import { AUTHORISE_USER, GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES } from "./actionConstants";
 
 import { setCurrentMovieData } from "./actionCreators/currentMovie";
 import { setCurrentSearchData } from "./actionCreators/currentSearch";
 import { setMovies } from "./actionCreators/homepage";
 import { setStateVariable } from "./actionCreators/stateVariables";
+import { setCurrentUserData } from "./actionCreators/auth";
 
 import features from "../API/features_api";
+import auth from "../API/auth_api";
 
 function* getSearchResults({ searchQuery, pageNum }) {
   try {
@@ -38,6 +40,7 @@ function* getSearchResults({ searchQuery, pageNum }) {
       yield put(setStateVariable("searchLoading", false));
     }
   } catch (error) {
+    yield put(setStateVariable("searchLoading", false));
     yield put(setStateVariable("searchError", true));
   }
 }
@@ -59,6 +62,7 @@ function* getMovies() {
 
     yield put(setStateVariable("homepageLoading", false));
   } catch (error) {
+    yield put(setStateVariable("homepageLoading", false));
     yield put(setStateVariable("homepageError", true));
   }
 }
@@ -72,7 +76,23 @@ function* getMovieData({ id }) {
 
     yield put(setStateVariable("movieLoading", false));
   } catch (error) {
+    yield put(setStateVariable("movieLoading", false));
     yield put(setStateVariable("movieError", true));
+  }
+}
+
+function* authoriseUser({ isLogin, data }) {
+  try {
+    yield put(setStateVariable("authLoading", true));
+
+    const res = yield call(auth.authorise, isLogin, JSON.stringify(data));
+    yield put(setCurrentUserData(res.data));
+
+    yield put(setStateVariable("authLoading", false));
+    yield put(setStateVariable("authSuccess", true));
+  } catch (error) {
+    yield put(setStateVariable("authLoading", false));
+    yield put(setStateVariable("authError", error.response.data));
   }
 }
 
@@ -82,4 +102,6 @@ export default function* rootSaga() {
   yield takeEvery(GET_MOVIES, getMovies);
 
   yield takeEvery(GET_CURRENT_MOVIE_DATA, getMovieData);
+
+  yield takeEvery(AUTHORISE_USER, authoriseUser);
 }

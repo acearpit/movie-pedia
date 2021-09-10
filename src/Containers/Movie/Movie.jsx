@@ -45,9 +45,7 @@ const Movie = ({ match, state, getCurrentMovie }) => {
   ) : (
     <div className="container Movie">
       <div className="row main_row">
-        <div className="col-xs-12 col-md-4 image_container">
-          <img src={image_path} className="img-fluid IMG" />
-        </div>
+        <div className="col-xs-12 col-md-4 image_container" style={{ background: `url(${image_path})`, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
         <div className="col-xs-12 col-md-8 movie_data_container">
           <h1 className="title">{data.original_title}</h1>
           <h5 className="tagline">{tagline}</h5>
