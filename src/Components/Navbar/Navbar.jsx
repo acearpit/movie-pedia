@@ -9,12 +9,77 @@ import { setStateVariable } from "../../redux/actionCreators/stateVariables";
 
 const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
   const [show, setShow] = useState(false);
+  const [showMenu, setshowMenu] = useState(false);
 
   return (
     <div className="navbar">
-      <Link to="/movie-pedia" className="nav_left">
-        <img src="https://pngimage.net/wp-content/uploads/2018/06/mp-png-5.png" />
-      </Link>
+      <div className={`mobile_menu ${showMenu && "animate"}`}>
+        {showMenu &&
+          (isLoggedIn ? (
+            <>
+              <span>
+                Hi, {user.first_name} {user.last_name}
+              </span>
+              <span className="divider" />
+              <span>
+                <Link
+                  to="/movie-pedia/profile"
+                  onClick={() => {
+                    setshowMenu(false);
+                  }}>
+                  My Profile
+                </Link>
+              </span>
+              <span>
+                <Link
+                  to="/movie-pedia/watchlist"
+                  onClick={() => {
+                    setshowMenu(false);
+                  }}>
+                  My Watchlist
+                </Link>
+              </span>
+              <span className="divider" />
+              <span
+                onClick={(e) => {
+                  e.preventDefault();
+                  setStateVar("authSuccess", false);
+                  setshowMenu(false);
+                  signout();
+                }}>
+                Signout
+              </span>
+            </>
+          ) : (
+            <span>
+              <Link
+                to="/movie-pedia/auth"
+                className="menu_signin"
+                onClick={() => {
+                  setshowMenu(false);
+                }}>
+                Signin
+              </Link>
+            </span>
+          ))}
+      </div>
+      <div className="nav_left">
+        <Link to="/movie-pedia">
+          <img src="https://pngimage.net/wp-content/uploads/2018/06/mp-png-5.png" />
+        </Link>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 hamburger"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="black"
+          onClick={(e) => {
+            e.preventDefault();
+            setshowMenu(!showMenu);
+          }}>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </div>
       <div className="nav_center">
         <input type="text" placeholder="Search here..." className="input" id="searchBar" onChange={handleSearch} />
       </div>
@@ -47,6 +112,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     setStateVar("authSuccess", false);
+                    setShow(false);
                     signout();
                   }}>
                   Signout

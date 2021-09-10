@@ -35,7 +35,11 @@
   justify-content: flex-end;
 }
 
-.nav_left > img {
+.hamburger {
+  display: none;
+}
+
+.nav_left > a > img {
   height: 60px;
   width: 80px;
 }
@@ -131,7 +135,8 @@ a.login {
   flex-direction: column;
 }
 
-.user_dropdown > span {
+.user_dropdown > span,
+.mobile_menu > span {
   width: 100%;
   font-size: large;
   font-weight: 300;
@@ -145,9 +150,46 @@ a.login {
   border-top: 1px solid rgba(0, 0, 0, 0.561);
 }
 
-.user_dropdown > span > a {
+.mobile_menu .divider {
+  padding: 0px;
+  height: 1px;
+  border-top: 1px solid white;
+}
+
+.user_dropdown > span > a,
+.mobile_menu > span > a {
   text-decoration: none;
   color: white;
+}
+
+.mobile_menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100vw;
+  display: none;
+  flex-direction: column;
+  height: 0px;
+  box-sizing: border-box;
+  transition: all 0.5s ease-in-out;
+  z-index: 2000;
+  background: black;
+  color: white;
+  opacity: 0;
+}
+
+.animate {
+  height: auto;
+  opacity: 1;
+}
+
+.menu_signin {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  font-size: large;
+  font-weight: 300;
+  letter-spacing: 1.1px;
 }
 
 @media (max-width: 700px) {
@@ -156,11 +198,12 @@ a.login {
   }
 
   .nav_left {
-    width: 20%;
+    width: 10%;
   }
 
   .nav_center {
-    width: 80%;
+    margin-left: auto;
+    width: 85%;
     justify-content: flex-end;
   }
 
@@ -170,5 +213,20 @@ a.login {
 
   .input:focus {
     width: 90%;
+  }
+
+  .hamburger {
+    display: initial;
+    height: 50px !important;
+    flex: none;
+    cursor: pointer;
+  }
+
+  .nav_left > a {
+    display: none;
+  }
+
+  .mobile_menu {
+    display: flex;
   }
 }
