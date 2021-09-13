@@ -17,7 +17,7 @@ const Row = ({ type, movies }) => {
                 <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} className="row_IMG" />
               </div>
               <div className="more_info">
-                <Link to={`/movie-pedia/movie/${movie.id}`}>
+                <Link to={`/movie/${movie.id}`}>
                   <button className="more_details">More Details</button>
                 </Link>
               </div>

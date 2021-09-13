@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navbar from "./Components/Navbar/Navbar.jsx";
@@ -27,26 +27,26 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App" id="##">
         <Navbar handleSearch={handleSearch} />
         {state.isLoading ? (
           <HashLoader color={"#daa520"} loading={state.isLoading} size={100} />
         ) : (
           <>
-            {state.toRedirect ? <Redirect to="/movie-pedia" /> : null}
+            {state.toRedirect ? <Redirect to="/" /> : null}
             <Switch>
-              <Route path="/movie-pedia" exact>
+              <Route path="/" exact>
                 {state.search.curr_search ? <LiveSearch /> : <HomePage />}
               </Route>
-              <Route path="/movie-pedia/movie/:id" component={Movie} />
-              <Route path="/movie-pedia/auth" component={Auth} />
+              <Route path="/movie/:id" component={Movie} />
+              <Route path="/auth" component={Auth} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}
           </>
         )}
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

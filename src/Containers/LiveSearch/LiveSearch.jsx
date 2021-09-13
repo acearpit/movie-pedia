@@ -69,7 +69,7 @@ const LiveSearch = ({ state, handleLiveSearch }) => {
                   <img src={image_path} alt={movie.original_title} className="image" />
                   <button type="submit" className="more_details">
                     <Link
-                      to={`/movie-pedia/movie/${movie.id}`}
+                      to={`/movie/${movie.id}`}
                       style={{
                         textDecoration: "none",
                         color: "black",
