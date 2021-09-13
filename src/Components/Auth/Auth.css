@@ -28,6 +28,7 @@
   justify-content: flex-start;
   align-items: center;
   transition: all 0.5s ease-in-out;
+  opacity: 1;
 }
 
 .auth_field {
@@ -38,12 +39,12 @@
 }
 
 .auth_field > input {
-  border-radius: 20px;
+  border-radius: 5px;
   outline: none;
   border: 2px solid black;
   box-sizing: border-box;
-  padding: 15px;
-  height: 30px;
+  padding: 10px;
+  height: 40px;
   font-size: 1rem;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.596);
@@ -51,7 +52,7 @@
 }
 
 .auth_field > input:focus {
-  border-color: goldenrod;
+  border-color: blue;
   color: black;
 }
 
@@ -60,13 +61,19 @@
 }
 
 .switch {
-  font-size: medium;
+  font-size: small;
   color: black;
   width: 100%;
+  letter-spacing: 0.5px;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.switch > span > span {
+  color: rgba(255, 0, 0, 0.911);
 }
 
 .signup {
@@ -96,4 +103,11 @@
   text-align: left;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.auth_type_heading {
+  font-size: x-large;
+  font-weight: 800;
+  margin-bottom: 0;
+  letter-spacing: 2px !important;
 }

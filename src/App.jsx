@@ -27,7 +27,7 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/movie-pedia">
       <div className="App" id="##">
         <Navbar handleSearch={handleSearch} />
         {state.isLoading ? (

@@ -131,51 +131,7 @@ const Auth = ({ loading, error, success, user, authorise, setStateVar }) => {
   return (
     <div className="auth_bg">
       <div className="auth_middle_cntnr">
-        {error && <p className="auth_error">{error}</p>}
-        {!isLogin && (
-          <>
-            <div className="auth_field">
-              <span className="auth_label">
-                First Name <span style={{ color: "red" }}>*</span>
-              </span>
-              <input type="text" name="first_name" value={firstName} className={firstNameError ? "error_border" : ""} onChange={updateState} />
-              {firstNameError && <p className="error">{firstNameError}</p>}
-            </div>
-            <div className="auth_field">
-              <span className="auth_label">
-                Last Name <span style={{ color: "red" }}>*</span>
-              </span>
-              <input type="text" name="last_name" value={lastName} className={lastNameError ? "error_border" : ""} onChange={updateState} />
-              {lastNameError && <p className="error">{lastNameError}</p>}
-            </div>
-          </>
-        )}
-        <div className="auth_field">
-          <span className="auth_label">
-            Email <span style={{ color: "red" }}>*</span>
-          </span>
-          <input type="email" name="email" value={email} className={emailError ? "error_border" : ""} onChange={updateState} />
-          {emailError && <p className="error">{emailError}</p>}
-        </div>
-        <div className="auth_field">
-          <span className="auth_label">
-            Password <span style={{ color: "red" }}>*</span>
-          </span>
-          <input type="password" name="password" value={password} className={passwordError ? "error_border" : ""} onChange={updateState} />
-          {passwordError && <p className="error">{passwordError}</p>}
-        </div>
-        {!isLogin && (
-          <div className="auth_field">
-            <span className="auth_label">
-              Confirm Password <span style={{ color: "red" }}>*</span>
-            </span>
-            <input type="password" name="confirm_pass" className={confirmPasswordError ? "error_border" : ""} value={confirmPassword} onChange={updateState} />
-            {confirmPasswordError && <p className="error">{confirmPasswordError}</p>}
-          </div>
-        )}
-        <button className="signup" onClick={handleAuth}>
-          {loading ? <ClockLoader size={25} color={"white"} loading={loading} /> : isLogin ? "Login" : "Signup"}
-        </button>
+        <p className="auth_type_heading">{isLogin ? "Signin" : "Create an account"}</p>
         <div
           className="switch"
           onClick={(e) => {
@@ -183,8 +139,46 @@ const Auth = ({ loading, error, success, user, authorise, setStateVar }) => {
             handleUpdation();
             setIsLogin(!isLogin);
           }}>
-          {!isLogin ? "Already have an account? Login" : "Don't have an account? Signup"}
+          {!isLogin ? (
+            <span>
+              Already have an account? <span className="">Login</span>
+            </span>
+          ) : (
+            <span>
+              Don't have an account? <span>Signup</span>
+            </span>
+          )}
         </div>
+        {error && <p className="auth_error">{error}</p>}
+        {!isLogin && (
+          <>
+            <div className="auth_field">
+              <input type="text" name="first_name" value={firstName} placeholder="First Name" className={firstNameError ? "error_border" : ""} onChange={updateState} />
+              {firstNameError && <p className="error">{firstNameError}</p>}
+            </div>
+            <div className="auth_field">
+              <input type="text" name="last_name" placeholder="Last Name" value={lastName} className={lastNameError ? "error_border" : ""} onChange={updateState} />
+              {lastNameError && <p className="error">{lastNameError}</p>}
+            </div>
+          </>
+        )}
+        <div className="auth_field">
+          <input placeholder="Email" type="email" name="email" value={email} className={emailError ? "error_border" : ""} onChange={updateState} />
+          {emailError && <p className="error">{emailError}</p>}
+        </div>
+        <div className="auth_field">
+          <input placeholder="Password" type="password" name="password" value={password} className={passwordError ? "error_border" : ""} onChange={updateState} />
+          {passwordError && <p className="error">{passwordError}</p>}
+        </div>
+        {!isLogin && (
+          <div className="auth_field">
+            <input placeholder="Confirm Password" type="password" name="confirm_pass" className={confirmPasswordError ? "error_border" : ""} value={confirmPassword} onChange={updateState} />
+            {confirmPasswordError && <p className="error">{confirmPasswordError}</p>}
+          </div>
+        )}
+        <button className="signup" onClick={handleAuth}>
+          {loading ? <ClockLoader size={25} color={"white"} loading={loading} /> : isLogin ? "Login" : "Signup"}
+        </button>
       </div>
     </div>
   );
