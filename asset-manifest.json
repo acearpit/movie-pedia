@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/movie-pedia/static/css/main.50f5bb85.chunk.css",
-    "main.js": "/movie-pedia/static/js/main.26bbfabc.chunk.js",
-    "main.js.map": "/movie-pedia/static/js/main.26bbfabc.chunk.js.map",
+    "main.js": "/movie-pedia/static/js/main.de1e4e7d.chunk.js",
+    "main.js.map": "/movie-pedia/static/js/main.de1e4e7d.chunk.js.map",
     "runtime-main.js": "/movie-pedia/static/js/runtime-main.00010c32.js",
     "runtime-main.js.map": "/movie-pedia/static/js/runtime-main.00010c32.js.map",
     "static/css/2.6525f3fb.chunk.css": "/movie-pedia/static/css/2.6525f3fb.chunk.css",
-    "static/js/2.25438d8a.chunk.js": "/movie-pedia/static/js/2.25438d8a.chunk.js",
-    "static/js/2.25438d8a.chunk.js.map": "/movie-pedia/static/js/2.25438d8a.chunk.js.map",
+    "static/js/2.37213711.chunk.js": "/movie-pedia/static/js/2.37213711.chunk.js",
+    "static/js/2.37213711.chunk.js.map": "/movie-pedia/static/js/2.37213711.chunk.js.map",
     "index.html": "/movie-pedia/index.html",
     "static/css/2.6525f3fb.chunk.css.map": "/movie-pedia/static/css/2.6525f3fb.chunk.css.map",
     "static/css/main.50f5bb85.chunk.css.map": "/movie-pedia/static/css/main.50f5bb85.chunk.css.map",
-    "static/js/2.25438d8a.chunk.js.LICENSE.txt": "/movie-pedia/static/js/2.25438d8a.chunk.js.LICENSE.txt",
+    "static/js/2.37213711.chunk.js.LICENSE.txt": "/movie-pedia/static/js/2.37213711.chunk.js.LICENSE.txt",
     "static/media/mdb.css": "/movie-pedia/static/media/arrow_right.0897f985.svg",
     "static/media/Auth.css": "/movie-pedia/static/media/bg.08fdcd0c.jpg",
     "static/media/all.min.css": "/movie-pedia/static/media/fa-solid-900.f4f93856.woff"
@@ -19,8 +19,8 @@
   "entrypoints": [
     "static/js/runtime-main.00010c32.js",
     "static/css/2.6525f3fb.chunk.css",
-    "static/js/2.25438d8a.chunk.js",
+    "static/js/2.37213711.chunk.js",
     "static/css/main.50f5bb85.chunk.css",
-    "static/js/main.26bbfabc.chunk.js"
+    "static/js/main.de1e4e7d.chunk.js"
   ]
 }
