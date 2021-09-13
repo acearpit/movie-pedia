@@ -1,0 +1,11 @@
+.not_found {
+  width: 100vw;
+  height: calc(100vh - 113px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
+  padding: 5%;
+  text-align: center;
+}

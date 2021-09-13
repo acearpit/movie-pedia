@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import HashLoader from "./Components/Loaders/HashLoader.jsx";
 import Auth from "./Components/Auth/Auth";
 import Footer from "./Components/Footer/Footer.jsx";
+import NotFound from "./Components/NotFound/404";
 
 import LiveSearch from "./Containers/LiveSearch/LiveSearch.jsx";
 import HomePage from "./Containers/HomePage/HomePage.jsx";
@@ -41,6 +42,7 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
               </Route>
               <Route path="/movie/:id" component={Movie} />
               <Route path="/auth" component={Auth} />
+              <Route component={NotFound} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}
           </>
