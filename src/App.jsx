@@ -27,20 +27,20 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
   }, []);
 
   return (
-    <BrowserRouter basename="/movie-pedia">
+    <BrowserRouter>
       <div className="App" id="##">
         <Navbar handleSearch={handleSearch} />
         {state.isLoading ? (
           <HashLoader color={"#daa520"} loading={state.isLoading} size={100} />
         ) : (
           <>
-            {state.toRedirect ? <Redirect to="/" /> : null}
+            {state.toRedirect ? <Redirect to="/movie-pedia" /> : null}
             <Switch>
-              <Route path="/" exact>
+              <Route path="/movie-pedia" exact>
                 {state.search.curr_search ? <LiveSearch /> : <HomePage />}
               </Route>
-              <Route path="/movie/:id" component={Movie} />
-              <Route path="/auth" component={Auth} />
+              <Route path="/movie-pedia/movie/:id" component={Movie} />
+              <Route path="/movie-pedia/auth" component={Auth} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}
           </>

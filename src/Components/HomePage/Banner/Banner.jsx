@@ -22,7 +22,7 @@ const Banner = ({ movies }) => {
               />
               <div className="carousel-caption d-block">
                 <h5 className="caption">{movie.original_title}</h5>
-                <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
+                <Link to={`/movie-pedia/movie/${movie.id}`} style={{ textDecoration: "none" }}>
                   <button className="btn btn-md more_INFO">MORE INFO</button>
                 </Link>
               </div>

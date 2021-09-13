@@ -23,7 +23,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               <span className="divider" />
               <span>
                 <Link
-                  to="/profile"
+                  to="/movie-pedia/profile"
                   onClick={() => {
                     setshowMenu(false);
                   }}>
@@ -32,7 +32,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               </span>
               <span>
                 <Link
-                  to="/watchlist"
+                  to="/movie-pedia/watchlist"
                   onClick={() => {
                     setshowMenu(false);
                   }}>
@@ -53,7 +53,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
           ) : (
             <span>
               <Link
-                to="/auth"
+                to="/movie-pedia/auth"
                 className="menu_signin"
                 onClick={() => {
                   setshowMenu(false);
@@ -64,7 +64,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
           ))}
       </div>
       <div className="nav_left">
-        <Link to="/">
+        <Link to="/movie-pedia">
           <img src="https://pngimage.net/wp-content/uploads/2018/06/mp-png-5.png" />
         </Link>
         <svg
@@ -102,10 +102,10 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
             {show ? (
               <div className="user_dropdown">
                 <span>
-                  <Link to="/profile">My Profile</Link>
+                  <Link to="/movie-pedia/profile">My Profile</Link>
                 </span>
                 <span>
-                  <Link to="/watchlist">My Watchlist</Link>
+                  <Link to="/movie-pedia/watchlist">My Watchlist</Link>
                 </span>
                 <span className="divider" />
                 <span
@@ -121,7 +121,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
             ) : null}
           </div>
         ) : (
-          <Link to="/auth" className="login">
+          <Link to="/movie-pedia/auth" className="login">
             Signin
           </Link>
         )}
