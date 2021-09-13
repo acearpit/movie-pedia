@@ -23,7 +23,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               <span className="divider" />
               <span>
                 <Link
-                  to="/movie-pedia/profile"
+                  to="/profile"
                   onClick={() => {
                     setshowMenu(false);
                   }}>
@@ -32,7 +32,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               </span>
               <span>
                 <Link
-                  to="/movie-pedia/watchlist"
+                  to="/watchlist"
                   onClick={() => {
                     setshowMenu(false);
                   }}>
@@ -53,7 +53,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
           ) : (
             <span>
               <Link
-                to="/movie-pedia/auth"
+                to="/auth"
                 className="menu_signin"
                 onClick={() => {
                   setshowMenu(false);
@@ -64,7 +64,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
           ))}
       </div>
       <div className="nav_left">
-        <Link to="/movie-pedia">
+        <Link to="/">
           <img src="https://pngimage.net/wp-content/uploads/2018/06/mp-png-5.png" />
         </Link>
         <svg
@@ -81,7 +81,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
         </svg>
       </div>
       <div className="nav_center">
-        <input type="text" placeholder="Search here..." className="input" id="searchBar" onChange={handleSearch} />
+        <input type="text" placeholder="Search movies..." className="input" id="searchBar" onChange={handleSearch} />
       </div>
       <div className="nav_right">
         {isLoggedIn ? (
@@ -102,10 +102,10 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
             {show ? (
               <div className="user_dropdown">
                 <span>
-                  <Link to="/movie-pedia/profile">My Profile</Link>
+                  <Link to="/profile">My Profile</Link>
                 </span>
                 <span>
-                  <Link to="/movie-pedia/watchlist">My Watchlist</Link>
+                  <Link to="/watchlist">My Watchlist</Link>
                 </span>
                 <span className="divider" />
                 <span
@@ -121,7 +121,7 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
             ) : null}
           </div>
         ) : (
-          <Link to="/movie-pedia/auth" className="login">
+          <Link to="/auth" className="login">
             Signin
           </Link>
         )}

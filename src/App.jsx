@@ -34,13 +34,13 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
           <HashLoader color={"#daa520"} loading={state.isLoading} size={100} />
         ) : (
           <>
-            {state.toRedirect ? <Redirect to="/movie-pedia" /> : null}
+            {state.toRedirect ? <Redirect to="/" /> : null}
             <Switch>
-              <Route path="/movie-pedia" exact>
+              <Route path="/" exact>
                 {state.search.curr_search ? <LiveSearch /> : <HomePage />}
               </Route>
-              <Route path="/movie-pedia/movie/:id" component={Movie} />
-              <Route path="/movie-pedia/auth" component={Auth} />
+              <Route path="/movie/:id" component={Movie} />
+              <Route path="/auth" component={Auth} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}
           </>
