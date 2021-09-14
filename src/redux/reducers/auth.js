@@ -1,10 +1,11 @@
 import { SET_CURRENT_USER_DATA, LOGOUT } from "../actionConstants";
 
 const initialState = {
+  _id: "",
+  profile_pic: "",
   first_name: "",
   last_name: "",
   email: "",
-  _id: "",
   watchlist: [],
   token: "",
 };
@@ -19,10 +20,11 @@ export default (state = initialState, action) => {
       return state;
     case LOGOUT:
       state = {
+        _id: "",
+        profile_pic: "",
         first_name: "",
         last_name: "",
         email: "",
-        _id: "",
         watchlist: [],
         token: "",
       };

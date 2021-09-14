@@ -11,6 +11,12 @@ const initialState = {
   authLoading: false,
   authSuccess: false,
   authError: "",
+  updateSuccess: false,
+  updateLoading: false,
+  updateError: "",
+  deleteSuccess: false,
+  deleteLoading: false,
+  deleteError: "",
 };
 
 export default (state = initialState, action) => {

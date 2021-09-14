@@ -1,12 +1,12 @@
 import { takeLatest, takeEvery, call, put, delay, all } from "redux-saga/effects";
 
-import { AUTHORISE_USER, GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES } from "./actionConstants";
+import { AUTHORISE_USER, DELETE_USER, GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES, UPDATE_USER } from "./actionConstants";
 
 import { setCurrentMovieData } from "./actionCreators/currentMovie";
 import { setCurrentSearchData } from "./actionCreators/currentSearch";
 import { setMovies } from "./actionCreators/homepage";
 import { setStateVariable } from "./actionCreators/stateVariables";
-import { setCurrentUserData } from "./actionCreators/auth";
+import { logout, setCurrentUserData } from "./actionCreators/auth";
 
 import features from "../API/features_api";
 import auth from "../API/auth_api";
@@ -96,6 +96,35 @@ function* authoriseUser({ isLogin, data }) {
   }
 }
 
+function* updateUserData({ token, data }) {
+  try {
+    yield put(setStateVariable("updateLoading", true));
+
+    const res = yield call(auth.updateProfile, token, JSON.stringify(data));
+    yield put(setCurrentUserData(res.data));
+
+    yield put(setStateVariable("updateSuccess", true));
+    yield put(setStateVariable("updateLoading", false));
+  } catch (error) {
+    yield put(setStateVariable("updateLoading", false));
+    yield put(setStateVariable("updateError", error.response.data));
+  }
+}
+
+function* deleteUser({ token }) {
+  try {
+    yield put(setStateVariable("deleteLoading", true));
+
+    yield call(auth.deleteProfile, token);
+    yield put(logout());
+
+    yield put(setStateVariable("deleteLoading", false));
+  } catch (error) {
+    yield put(setStateVariable("deleteLoading", false));
+    yield put(setStateVariable("deleteError", error.response.data));
+  }
+}
+
 export default function* rootSaga() {
   yield takeLatest(GET_CURRENT_SEARCH_DATA, getSearchResults);
 
@@ -104,4 +133,8 @@ export default function* rootSaga() {
   yield takeEvery(GET_CURRENT_MOVIE_DATA, getMovieData);
 
   yield takeEvery(AUTHORISE_USER, authoriseUser);
+
+  yield takeLatest(UPDATE_USER, updateUserData);
+
+  yield takeLatest(DELETE_USER, deleteUser);
 }

@@ -1,4 +1,4 @@
-import { AUTHORISE_USER, GET_CURRENT_USER_DATA, LOGOUT, SET_CURRENT_USER_DATA } from "../actionConstants";
+import { AUTHORISE_USER, GET_CURRENT_USER_DATA, LOGOUT, SET_CURRENT_USER_DATA, UPDATE_USER, DELETE_USER } from "../actionConstants";
 
 export const authoriseUser = (isLogin, data) => {
   return {
@@ -25,5 +25,20 @@ export const setCurrentUserData = (data) => {
   return {
     type: SET_CURRENT_USER_DATA,
     data,
+  };
+};
+
+export const updateCurrentUserData = (token, data) => {
+  return {
+    type: UPDATE_USER,
+    token,
+    data,
+  };
+};
+
+export const deleteUser = (token) => {
+  return {
+    type: DELETE_USER,
+    token,
   };
 };

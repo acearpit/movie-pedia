@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navbar from "./Components/Navbar/Navbar.jsx";
@@ -11,6 +11,7 @@ import NotFound from "./Components/NotFound/404";
 import LiveSearch from "./Containers/LiveSearch/LiveSearch.jsx";
 import HomePage from "./Containers/HomePage/HomePage.jsx";
 import Movie from "./Containers/Movie/Movie.jsx";
+import Profile from "./Containers/Profile/profile.jsx";
 
 import { getCurrentSearchData } from "./redux/actionCreators/currentSearch";
 import { getMovies } from "./redux/actionCreators/homepage";
@@ -42,6 +43,7 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
               </Route>
               <Route path="/movie/:id" component={Movie} />
               <Route path="/auth" component={Auth} />
+              <Route path="/profile" component={Profile} />
               <Route component={NotFound} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}

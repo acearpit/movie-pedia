@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Avatar from "react-avatar";
+
 import { logout } from "../../redux/actionCreators/auth";
 import { setStateVariable } from "../../redux/actionCreators/stateVariables";
 
@@ -91,7 +92,13 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               e.preventDefault();
               setShow(!show);
             }}>
-            <Avatar color={Avatar.getRandomColor("sitebase", ["red", "green", "blue", "violet"])} name={`${user.first_name} ${user.last_name}`} size="35" className="user_avatar" />
+            <Avatar
+              color={Avatar.getRandomColor("sitebase", ["red", "green", "blue", "violet"])}
+              name={`${user.first_name} ${user.last_name}`}
+              size="35"
+              className="user_avatar"
+              src={user.profile_pic}
+            />
             <span>
               Hi, {user.first_name}
               <svg xmlns="http://www.w3.org/2000/svg" style={{ height: "20px", width: "15px", marginLeft: "5px" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">

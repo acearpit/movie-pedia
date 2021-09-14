@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://movie-pedia-backend.herokuapp.com";
-// const BASE_URL = "http://localhost:5000";
+// const BASE_URL = "https://movie-pedia-backend.herokuapp.com";
+const BASE_URL = "http://localhost:5000";
 
 export default {
   authorise: (isLogin, data) => {
@@ -15,4 +15,20 @@ export default {
       },
     });
   },
+  updateProfile: (token, data) =>
+    axios.put(`${BASE_URL}/update`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  deleteProfile: (token) =>
+    axios.delete(`${BASE_URL}/delete`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
