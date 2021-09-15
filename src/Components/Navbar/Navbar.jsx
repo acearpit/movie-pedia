@@ -23,6 +23,9 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               </span>
               <span className="divider" />
               <span>
+                <Link to="/">Home</Link>
+              </span>
+              <span>
                 <Link
                   to="/profile"
                   onClick={() => {
@@ -52,16 +55,23 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               </span>
             </>
           ) : (
-            <span>
-              <Link
-                to="/auth"
-                className="menu_signin"
-                onClick={() => {
-                  setshowMenu(false);
-                }}>
-                Signin
-              </Link>
-            </span>
+            <>
+              <span>
+                <Link to="/" className="menu_signin">
+                  Home
+                </Link>
+              </span>
+              <span>
+                <Link
+                  to="/auth"
+                  className="menu_signin"
+                  onClick={() => {
+                    setshowMenu(false);
+                  }}>
+                  Signin
+                </Link>
+              </span>
+            </>
           ))}
       </div>
       <div className="nav_left">
@@ -100,9 +110,9 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               src={user.profile_pic}
             />
             <span>
-              Hi, {user.first_name}
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: "20px", width: "15px", marginLeft: "5px" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M19 9l-7 7-7-7" />
+              {user.first_name}
+              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: "15px", width: "15px", marginLeft: "5px" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
               </svg>
             </span>
 

@@ -4,6 +4,11 @@
   font-family: monospace;
 }
 
+.main_row {
+  box-shadow: rgba(218, 165, 32, 0.4) -5px 5px, rgba(218, 165, 32, 0.3) -10px 10px, rgba(218, 165, 32, 0.2) -15px 15px, rgba(218, 165, 32, 0.1) -20px 20px, rgba(218, 165, 32, 0.05) -25px 25px;
+  border-radius: 10px !important;
+}
+
 .image_container,
 .movie_data_container {
   box-sizing: border-box;

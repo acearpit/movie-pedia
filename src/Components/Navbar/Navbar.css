@@ -113,9 +113,10 @@ a.login {
 }
 
 .user_data > span {
-  color: white;
+  color: white !important;
   font-weight: 600;
   margin-left: 5px;
+  font-size: medium;
 }
 
 .user_dropdown {
@@ -133,6 +134,7 @@ a.login {
   background-color: rgba(128, 128, 128, 0.918);
   color: white;
   flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
 }
 
 .user_dropdown > span,
@@ -173,9 +175,10 @@ a.login {
   box-sizing: border-box;
   transition: all 0.5s ease-in-out;
   z-index: 2000;
-  background: black;
+  background: gray;
   color: white;
   opacity: 0;
+  box-shadow: rgba(194, 189, 120, 0.4) 0px 5px, rgba(194, 189, 120, 0.3) 0px 10px, rgba(194, 189, 120, 0.2) 0px 15px, rgba(194, 189, 120, 0.1) 0px 20px, rgba(194, 189, 120, 0.05) 0px 25px;
 }
 
 .animate {
