@@ -122,8 +122,8 @@ a.login {
 .user_dropdown {
   position: absolute;
   top: 110%;
-  left: 0%;
-  width: 100%;
+  right: 0%;
+  width: 150px;
   height: auto;
   background: white;
   color: black;
@@ -141,7 +141,7 @@ a.login {
 .mobile_menu > span {
   width: 100%;
   font-size: large;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 1.1px;
   padding: 5px;
 }

@@ -15,7 +15,7 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
 
   const imageRef = useRef(null);
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState({ link: "", file: null });
   const [imageError, setImageError] = useState("");
 
   const [firstName, setFirstName] = useState("");
@@ -39,7 +39,7 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
   useEffect(() => {
     if (!user.token) history.goBack();
     if (user) {
-      setImage(user.profile_pic);
+      setImage({ link: "", file: null });
       setImageError("");
 
       setFirstName(user.first_name);
@@ -89,13 +89,16 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
   const cancelEdit = (e) => {
     e.preventDefault();
 
+    setStateVar("updateError", "");
+    setStateVar("deleteError", "");
+
     setFirstName(user.first_name);
     setFirstNameError("");
 
     setLastName(user.last_name);
     setLastNameError("");
 
-    setImage(user.profile_pic);
+    setImage({ link: "", file: null });
     setImageError("");
 
     setNewPassword("");
@@ -138,19 +141,26 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
 
   const updateProfile = (e) => {
     e.preventDefault();
+    setStateVar("updateError", "");
+    setStateVar("deleteError", "");
 
     const isValid = performValidation();
     if (!isValid) return;
 
-    // send api req to update the profile
-    const data = { profilePic: image, firstName, lastName, newPassword, confirmPassword };
+    const data = new FormData();
+    data.append("profilePic", image.file);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("newPassword", newPassword);
+    data.append("confirmPassword", confirmPassword);
+
     updateUser(user.token, data);
   };
 
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
-      fileReader.readAsBinaryString(file);
+      fileReader.readAsDataURL(file);
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
@@ -168,19 +178,20 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
 
       // check for file size
       if (file.size > 2097152) {
-        setImage("");
+        setImage({ link: "", file: null });
         return setImageError("File size should not exceed 2mb!");
       }
 
       // check for file types (allowed ones are image/jpg, image/jpeg, image/png, image/gif)
       const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
       if (allowedTypes.indexOf(file.type) === -1) {
-        setImage("");
+        setImage({ link: "", file: null });
         return setImageError("The allowed file types are .png, .jpg, .jpeg, .gif");
       }
 
-      const path = await convertToBase64(file);
-      setImage(path);
+      setImage({ link: await convertToBase64(file), file });
+    } else {
+      setImage({ link: "", file: null });
     }
   };
 
@@ -190,16 +201,23 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
         {updateError && <p className="actionsError">{updateError}</p>}
         {deleteError && <p className="actionsError">{deleteError}</p>}
         <div className="avatar">
-          <Avatar color={Avatar.getRandomColor("sitebase", ["red", "green", "blue", "violet"])} name={`${firstName} ${lastName}`} size="130" round className="user_avatar_profile" src={image} />
+          <Avatar
+            color={Avatar.getRandomColor("sitebase", ["red", "green", "blue", "violet"])}
+            name={`${firstName} ${lastName}`}
+            size="130"
+            round
+            className="user_avatar_profile"
+            src={image.link ? image.link : user.profile_pic}
+          />
           {imageError && <p className="errorText">{imageError}</p>}
           {edit ? (
-            image ? (
+            image.link ? (
               <div className="selected_image">
                 <span
                   className="btn remove_image"
                   onClick={(e) => {
                     e.preventDefault();
-                    setImage("");
+                    setImage({ link: "", file: null });
                     setImageError("");
                   }}>
                   Remove

@@ -8,26 +8,19 @@ export default {
     let api_endpoint;
     if (isLogin) api_endpoint = `${BASE_URL}/login`;
     else api_endpoint = `${BASE_URL}/signup`;
-    return axios.post(api_endpoint, data, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    return axios.post(api_endpoint, data);
   },
   updateProfile: (token, data) =>
-    axios.put(`${BASE_URL}/update`, data, {
+    axios.post(`${BASE_URL}/update`, data, {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        ...axios.defaults.headers,
         Authorization: `Bearer ${token}`,
       },
     }),
   deleteProfile: (token) =>
     axios.delete(`${BASE_URL}/delete`, {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        ...axios.defaults.headers,
         Authorization: `Bearer ${token}`,
       },
     }),

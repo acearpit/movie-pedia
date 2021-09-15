@@ -11,6 +11,12 @@ import { logout, setCurrentUserData } from "./actionCreators/auth";
 import features from "../API/features_api";
 import auth from "../API/auth_api";
 
+const getErrorString = (error) => {
+  let errorString = error;
+  if (errorString.length > 50) errorString = "Something went wrong, please try again!";
+  return errorString;
+};
+
 function* getSearchResults({ searchQuery, pageNum }) {
   try {
     if (!searchQuery || searchQuery === "") {
@@ -85,14 +91,14 @@ function* authoriseUser({ isLogin, data }) {
   try {
     yield put(setStateVariable("authLoading", true));
 
-    const res = yield call(auth.authorise, isLogin, JSON.stringify(data));
+    const res = yield call(auth.authorise, isLogin, data);
     yield put(setCurrentUserData(res.data));
 
     yield put(setStateVariable("authLoading", false));
     yield put(setStateVariable("authSuccess", true));
   } catch (error) {
     yield put(setStateVariable("authLoading", false));
-    yield put(setStateVariable("authError", error.response.data));
+    yield put(setStateVariable("authError", getErrorString(error.response.data)));
   }
 }
 
@@ -100,14 +106,14 @@ function* updateUserData({ token, data }) {
   try {
     yield put(setStateVariable("updateLoading", true));
 
-    const res = yield call(auth.updateProfile, token, JSON.stringify(data));
+    const res = yield call(auth.updateProfile, token, data);
     yield put(setCurrentUserData(res.data));
 
     yield put(setStateVariable("updateSuccess", true));
     yield put(setStateVariable("updateLoading", false));
   } catch (error) {
     yield put(setStateVariable("updateLoading", false));
-    yield put(setStateVariable("updateError", error.response.data));
+    yield put(setStateVariable("updateError", getErrorString(error.response.data)));
   }
 }
 
@@ -121,7 +127,7 @@ function* deleteUser({ token }) {
     yield put(setStateVariable("deleteLoading", false));
   } catch (error) {
     yield put(setStateVariable("deleteLoading", false));
-    yield put(setStateVariable("deleteError", error.response.data));
+    yield put(setStateVariable("deleteError", getErrorString(error.response.data)));
   }
 }
 
