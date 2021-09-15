@@ -23,23 +23,17 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
               </span>
               <span className="divider" />
               <span>
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={() => setshowMenu(false)}>
+                  Home
+                </Link>
               </span>
               <span>
-                <Link
-                  to="/profile"
-                  onClick={() => {
-                    setshowMenu(false);
-                  }}>
+                <Link to="/profile" onClick={() => setshowMenu(false)}>
                   My Profile
                 </Link>
               </span>
               <span>
-                <Link
-                  to="/watchlist"
-                  onClick={() => {
-                    setshowMenu(false);
-                  }}>
+                <Link to="/watchlist" onClick={() => setshowMenu(false)}>
                   My Watchlist
                 </Link>
               </span>
@@ -57,17 +51,12 @@ const navbar = ({ handleSearch, isLoggedIn, user, signout, setStateVar }) => {
           ) : (
             <>
               <span>
-                <Link to="/" className="menu_signin">
+                <Link to="/" className="menu_signin" onClick={() => setshowMenu(false)}>
                   Home
                 </Link>
               </span>
               <span>
-                <Link
-                  to="/auth"
-                  className="menu_signin"
-                  onClick={() => {
-                    setshowMenu(false);
-                  }}>
+                <Link to="/auth" className="menu_signin" onClick={() => setshowMenu(false)}>
                   Signin
                 </Link>
               </span>

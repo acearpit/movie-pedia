@@ -110,6 +110,7 @@ a.login {
   padding: 5px;
   cursor: pointer;
   position: relative;
+  margin-right: 10px;
 }
 
 .user_data > span {

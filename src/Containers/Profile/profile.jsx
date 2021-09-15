@@ -177,7 +177,7 @@ const profile = ({ user, setStateVar, updateUser, updateSuccess, updateLoading, 
       const file = files[0];
 
       // check for file size
-      if (file.size > 2097152) {
+      if (file.size > 5242880) {
         setImage({ link: "", file: null });
         return setImageError("File size should not exceed 2mb!");
       }
