@@ -1,4 +1,4 @@
-import { AUTHORISE_USER, GET_CURRENT_USER_DATA, LOGOUT, SET_CURRENT_USER_DATA, UPDATE_USER, DELETE_USER } from "../actionConstants";
+import { AUTHORISE_USER, GET_CURRENT_USER_DATA, LOGOUT, SET_CURRENT_USER_DATA, UPDATE_USER, DELETE_USER, ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } from "../actionConstants";
 
 export const authoriseUser = (isLogin, data) => {
   return {
@@ -33,6 +33,22 @@ export const updateCurrentUserData = (token, data) => {
     type: UPDATE_USER,
     token,
     data,
+  };
+};
+
+export const addToWatchlist = (token, data) => {
+  return {
+    type: ADD_TO_WATCHLIST,
+    token,
+    data,
+  };
+};
+
+export const removeFromWatchlist = (token, id) => {
+  return {
+    type: REMOVE_FROM_WATCHLIST,
+    token,
+    id,
   };
 };
 

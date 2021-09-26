@@ -17,6 +17,7 @@ const initialState = {
   deleteSuccess: false,
   deleteLoading: false,
   deleteError: "",
+  addToWatchlistLoading: false,
 };
 
 export default (state = initialState, action) => {

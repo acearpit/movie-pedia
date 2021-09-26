@@ -28,6 +28,35 @@
   padding-top: 2%;
 }
 
+.watchlist {
+  width: auto;
+  margin: 20px 0px !important;
+  font-size: large;
+  font-weight: 700;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  color: white;
+  outline: none;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+
+.plus_symbol {
+  height: 25px;
+  margin-right: 5px;
+}
+
 .tagline {
   padding-top: 10px;
   font-weight: 700;
@@ -57,5 +86,9 @@
 @media (max-width: 575px) {
   .Movie {
     margin-top: 0% !important;
+  }
+
+  .watchlist {
+    width: 100%;
   }
 }

@@ -1,16 +1,28 @@
 import "./Movie.css";
 
-import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { withRouter, useHistory } from "react-router-dom";
 
 import HashLoader from "../../Components/Loaders/HashLoader.jsx";
+import ClockLoader from "../../Components/Loaders/ClockLoader.jsx";
 import { connect } from "react-redux";
 import { getCurrentMovieData } from "../../redux/actionCreators/currentMovie";
+import { addToWatchlist, removeFromWatchlist } from "../../redux/actionCreators/auth";
 
-const Movie = ({ match, state, getCurrentMovie }) => {
+const Movie = ({ match, state, getCurrentMovie, addMovie, deleteMovie }) => {
   useEffect(() => {
     getCurrentMovie(+match.params.id);
   }, []);
+
+  const [inWatchlist, setInWatchlist] = useState(false);
+
+  useEffect(() => {
+    if (state.user.watchlist) {
+      const idx = state.user.watchlist.findIndex((movie) => movie.id === +match.params.id);
+      if (idx !== -1) setInWatchlist(true);
+      else setInWatchlist(false);
+    }
+  }, [state.user.watchlist]);
 
   const readyData = (arr) => {
     const updated = arr.map((entry) => entry.name);
@@ -29,6 +41,8 @@ const Movie = ({ match, state, getCurrentMovie }) => {
     res = str.substr(0, idx) + res;
     return res;
   };
+
+  const history = useHistory();
 
   let image_path = null;
   let data = null;
@@ -57,6 +71,68 @@ const Movie = ({ match, state, getCurrentMovie }) => {
         />
         <div className="col-xs-12 col-md-8 movie_data_container">
           <h1 className="title">{data.original_title}</h1>
+          {!state.user || !state.user.token ? (
+            <button
+              className="watchlist green"
+              onClick={(e) => {
+                e.preventDefault();
+                history.push("/auth");
+              }}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="plus_symbol" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Add to watchlist
+            </button>
+          ) : !inWatchlist ? (
+            <button
+              className="watchlist green"
+              onClick={(e) => {
+                e.preventDefault();
+                addMovie(state.user.token, state.movie_data);
+              }}>
+              {!state.isAddedLoading ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="plus_symbol" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Add to watchlist
+                </>
+              ) : (
+                <ClockLoader size={25} color="white" loading={true} />
+              )}
+            </button>
+          ) : (
+            <>
+              <button
+                className="watchlist red"
+                onClick={(e) => {
+                  e.preventDefault();
+                  deleteMovie(state.user.token, +match.params.id);
+                }}>
+                {!state.isAddedLoading ? (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="plus_symbol" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Remove from watchlist
+                  </>
+                ) : (
+                  <ClockLoader size={25} color="white" loading={true} />
+                )}
+              </button>
+              <button
+                className="watchlist green"
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push("/watchlist");
+                }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="plus_symbol" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                View watchlist
+              </button>
+            </>
+          )}
           <h5 className="tagline">{tagline}</h5>
           <p className="overview">{data.overview}</p>
           <h5 className="genres_title"> GENRES: </h5>
@@ -97,8 +173,10 @@ const mapStateToProps = (globalState) => {
   return {
     state: {
       isLoading: globalState.stateVariables.movieLoading,
+      isAddedLoading: globalState.stateVariables.addToWatchlistLoading,
       movie_data: globalState.movieData.movieData,
       searchQuery: globalState.currentSearch.curr_search,
+      user: globalState.auth,
     },
   };
 };
@@ -106,6 +184,8 @@ const mapStateToProps = (globalState) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCurrentMovie: (id) => dispatch(getCurrentMovieData(id)),
+    addMovie: (token, data) => dispatch(addToWatchlist(token, data)),
+    deleteMovie: (token, id) => dispatch(removeFromWatchlist(token, id)),
   };
 };
 

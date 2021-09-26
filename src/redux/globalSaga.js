@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery, call, put, delay, all } from "redux-saga/effects";
 
-import { AUTHORISE_USER, DELETE_USER, GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES, UPDATE_USER } from "./actionConstants";
+import { ADD_TO_WATCHLIST, AUTHORISE_USER, DELETE_USER, GET_CURRENT_MOVIE_DATA, GET_CURRENT_SEARCH_DATA, GET_MOVIES, UPDATE_USER, REMOVE_FROM_WATCHLIST } from "./actionConstants";
 
 import { setCurrentMovieData } from "./actionCreators/currentMovie";
 import { setCurrentSearchData } from "./actionCreators/currentSearch";
@@ -131,6 +131,28 @@ function* deleteUser({ token }) {
   }
 }
 
+function* addToWatchlist({ token, data }) {
+  try {
+    yield put(setStateVariable("addToWatchlistLoading", true));
+    const res = yield call(auth.addToWatchlist, token, data);
+    yield put(setCurrentUserData(res.data));
+    yield put(setStateVariable("addToWatchlistLoading", false));
+  } catch (error) {
+    yield put(setStateVariable("addToWatchlistLoading", false));
+  }
+}
+
+function* removeFromWatchlist({ token, id }) {
+  try {
+    yield put(setStateVariable("addToWatchlistLoading", true));
+    const res = yield call(auth.deleteFromWatchlist, token, { id });
+    yield put(setCurrentUserData(res.data));
+    yield put(setStateVariable("addToWatchlistLoading", false));
+  } catch (error) {
+    yield put(setStateVariable("addToWatchlistLoading", false));
+  }
+}
+
 export default function* rootSaga() {
   yield takeLatest(GET_CURRENT_SEARCH_DATA, getSearchResults);
 
@@ -143,4 +165,8 @@ export default function* rootSaga() {
   yield takeLatest(UPDATE_USER, updateUserData);
 
   yield takeLatest(DELETE_USER, deleteUser);
+
+  yield takeLatest(ADD_TO_WATCHLIST, addToWatchlist);
+
+  yield takeLatest(REMOVE_FROM_WATCHLIST, removeFromWatchlist);
 }

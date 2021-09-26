@@ -18,6 +18,7 @@ import { getMovies } from "./redux/actionCreators/homepage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Watchlist from "./Containers/Watchlist/Watchlist.jsx";
 
 const App = ({ state, getAllMovies, handleLiveSearch }) => {
   const handleSearch = (event) => {
@@ -44,6 +45,7 @@ const App = ({ state, getAllMovies, handleLiveSearch }) => {
               <Route path="/movie/:id" component={Movie} />
               <Route path="/auth" component={Auth} />
               <Route path="/profile" component={Profile} />
+              <Route path="/watchlist" component={Watchlist} />
               <Route component={NotFound} />
             </Switch>
             {!state.isLoading && !state.isMovieLoading && !state.isSearchLoading ? <Footer /> : null}

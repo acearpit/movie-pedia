@@ -24,4 +24,18 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     }),
+  addToWatchlist: (token, data) =>
+    axios.post(`${BASE_URL}/addtowatchlist`, data, {
+      headers: {
+        ...axios.defaults.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  deleteFromWatchlist: (token, data) =>
+    axios.post(`${BASE_URL}/deletefromwatchlist`, data, {
+      headers: {
+        ...axios.defaults.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
